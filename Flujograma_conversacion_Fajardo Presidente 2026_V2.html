@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Guía de Conversación · Fajardo 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;600&display=swap');
+:root{
+  --Y:#F5C518;--B:#08111F;--BM:#132236;--BC:#1E3A5F;
+  --W:#fff;--R:#C0392B;--G:#1A7A4A;
+  --T:rgba(255,255,255,.75);--T2:rgba(255,255,255,.45);--T3:rgba(255,255,255,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Barlow',sans-serif;background:var(--B);color:var(--W);min-height:100vh;-webkit-text-size-adjust:100%}
+button,a{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.btn,.cluster-btn,.perfil-btn,.termo-opt,.bnav-btn,.hdr-btn,.back-btn,.star,.pcard{touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent}
+
+/* HEADER */
+.hdr{background:var(--BM);border-bottom:3px solid var(--Y);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300}
+.hdr-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.1rem;text-transform:uppercase;color:var(--Y)}
+.hdr-sub{font-size:.68rem;color:var(--T2);margin-top:.1rem}
+.hdr-btn{background:var(--Y);color:var(--B);font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;padding:.4rem .85rem;border-radius:4px;border:none;cursor:pointer}
+
+/* MAIN CONTAINER */
+.main{max-width:480px;margin:0 auto;padding:1.25rem 1rem 6rem}
+
+/* STEP */
+.step{display:none;animation:fadeIn .2s ease}
+.step.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* PROGRESS */
+.progress{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+.prog-bar{flex:1;height:4px;background:var(--T3);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--Y);border-radius:2px;transition:width .3s}
+.prog-label{font-size:.68rem;color:var(--T2);white-space:nowrap;font-weight:600}
+
+/* PHASE BADGE */
+.phase{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.22rem .7rem;border-radius:2px;margin-bottom:.75rem}
+.phase.apertura{background:rgba(245,197,24,.15);color:var(--Y)}
+.phase.diagnostico{background:rgba(44,74,124,.4);color:#7BA7E0}
+.phase.argumento{background:rgba(192,57,43,.15);color:#E87C75}
+.phase.cierre{background:rgba(26,122,74,.2);color:#5EC48A}
+.phase.captura{background:rgba(245,197,24,.2);color:var(--Y)}
+
+/* CARD */
+.card{background:var(--BM);border-radius:12px;padding:1.25rem;margin-bottom:1rem;border:1px solid var(--T3)}
+.card.highlight{border-color:var(--Y);background:rgba(245,197,24,.06)}
+.card.danger{border-color:rgba(192,57,43,.4);background:rgba(192,57,43,.06)}
+.card.success{border-color:rgba(26,122,74,.4);background:rgba(26,122,74,.06)}
+
+.card-ico{font-size:1.75rem;margin-bottom:.5rem;display:block}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;text-transform:uppercase;color:var(--Y);margin-bottom:.4rem;letter-spacing:.05em}
+.card.danger .card-title{color:#E87C75}
+.card.success .card-title{color:#5EC48A}
+.card p{font-size:.88rem;color:var(--T);line-height:1.6}
+.card p strong{color:var(--W)}
+
+/* SCRIPT BOX */
+.script{background:rgba(245,197,24,.07);border-left:2px solid var(--Y);padding:.7rem .9rem;border-radius:0 6px 6px 0;font-size:.88rem;color:var(--W);font-style:italic;line-height:1.6;margin:.6rem 0}
+.script.r{border-left-color:#E74C3C;background:rgba(192,57,43,.07)}
+.script.g{border-left-color:#27AE60;background:rgba(26,122,74,.07)}
+
+/* TERMO */
+.termo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;margin:.75rem 0}
+.termo-opt{border-radius:8px;padding:.75rem .5rem;text-align:center;cursor:pointer;transition:all .15s;border:2px solid transparent}
+.termo-opt:hover{transform:translateY(-2px)}
+.termo-opt.alto{background:rgba(26,122,74,.2);border-color:rgba(26,122,74,.3)}
+.termo-opt.alto:hover{border-color:#27AE60}
+.termo-opt.mid{background:rgba(245,197,24,.15);border-color:rgba(245,197,24,.3)}
+.termo-opt.mid:hover{border-color:var(--Y)}
+.termo-opt.bajo{background:rgba(192,57,43,.15);border-color:rgba(192,57,43,.3)}
+.termo-opt.bajo:hover{border-color:#E74C3C}
+.termo-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;line-height:1}
+.termo-opt.alto .termo-num{color:#5EC48A}
+.termo-opt.mid .termo-num{color:var(--Y)}
+.termo-opt.bajo .termo-num{color:#E87C75}
+.termo-label{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-top:.3rem;line-height:1.3}
+.termo-opt.alto .termo-label{color:#5EC48A}
+.termo-opt.mid .termo-label{color:var(--Y)}
+.termo-opt.bajo .termo-label{color:#E87C75}
+
+/* BUTTONS */
+.btns{display:grid;gap:.6rem;margin-top:1rem}
+.btn{background:var(--Y);color:var(--B);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;padding:.75rem 1rem;border-radius:8px;border:none;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;transition:all .15s}
+.btn:hover{opacity:.9;transform:translateY(-1px)}
+.btn.secondary{background:var(--BM);color:var(--W);border:1px solid var(--T3)}
+.btn.secondary:hover{border-color:var(--T)}
+.btn.danger{background:rgba(192,57,43,.2);color:#E87C75;border:1px solid rgba(192,57,43,.3)}
+.btn.success{background:rgba(26,122,74,.2);color:#5EC48A;border:1px solid rgba(26,122,74,.3)}
+.btn.full{background:var(--G);color:var(--W)}
+.btn-arrow{opacity:.6;font-size:.8rem}
+.btn-ico{font-size:1.1rem}
+
+/* CLUSTER BUTTONS */
+.clusters{display:grid;gap:.6rem;margin:.75rem 0}
+.cluster-btn{background:var(--BM);border-radius:10px;padding:1rem;border:1px solid var(--T3);cursor:pointer;display:flex;align-items:center;gap:.85rem;transition:all .15s;text-align:left;width:100%}
+.cluster-btn:hover{border-color:var(--Y);transform:translateY(-1px)}
+.cluster-btn .ico{font-size:1.8rem;flex-shrink:0}
+.cluster-btn .info{}
+.cluster-btn .nombre{font-weight:700;font-size:.9rem;color:var(--W)}
+.cluster-btn .desc{font-size:.75rem;color:var(--T2);margin-top:.15rem}
+
+/* PERFILES */
+.perfiles{display:grid;gap:.5rem;margin:.75rem 0}
+.perfil-btn{background:rgba(255,255,255,.04);border-radius:8px;padding:.85rem 1rem;border:1px solid var(--T3);cursor:pointer;display:flex;align-items:center;gap:.75rem;transition:all .15s;width:100%;text-align:left}
+.perfil-btn:hover{border-color:var(--Y);background:rgba(245,197,24,.06)}
+.perfil-btn .pico{font-size:1.4rem;flex-shrink:0}
+.perfil-btn .pinfo .pname{font-weight:600;font-size:.88rem;color:var(--W)}
+.perfil-btn .pinfo .pmeta{font-size:.72rem;color:var(--T2);margin-top:.1rem}
+
+/* WARN */
+.warn{background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.2);border-radius:6px;padding:.65rem .85rem;font-size:.8rem;color:var(--T);margin:.6rem 0}
+.warn strong{color:#E74C3C}
+
+/* INFO BOX */
+.info-box{background:rgba(255,255,255,.04);border-radius:8px;padding:.85rem 1rem;margin:.6rem 0}
+.info-box p{font-size:.82rem;color:var(--T);line-height:1.5}
+.info-box p strong{color:var(--W)}
+
+/* CLAVE */
+.clave{background:rgba(245,197,24,.08);border-radius:6px;padding:.65rem .85rem;font-size:.78rem;color:var(--Y);margin:.6rem 0;line-height:1.5}
+
+/* FORM */
+.form-group{margin-bottom:.85rem}
+.form-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--T2);margin-bottom:.35rem;display:block}
+.form-input{width:100%;background:var(--BM);border:1px solid var(--T3);border-radius:6px;padding:.6rem .85rem;font-size:.9rem;color:var(--W);font-family:'Barlow',sans-serif;transition:border-color .15s}
+.form-input:focus{outline:none;border-color:var(--Y)}
+.form-input::placeholder{color:var(--T2)}
+select.form-input option{background:var(--BM);color:var(--W)}
+textarea.form-input{resize:none;height:70px}
+
+/* STARS */
+.stars{display:flex;gap:.4rem;margin:.35rem 0}
+.star{font-size:1.4rem;cursor:pointer;color:var(--T3);transition:color .1s}
+.star.on{color:var(--Y)}
+
+/* BACK */
+.back-btn{display:flex;align-items:center;gap:.4rem;font-size:.75rem;color:var(--T2);cursor:pointer;margin-bottom:1.25rem;background:none;border:none;padding:0}
+.back-btn:hover{color:var(--W)}
+
+/* SUCCESS SCREEN */
+.success-screen{text-align:center;padding:2rem 1rem}
+.success-ico{font-size:4rem;margin-bottom:1rem;display:block}
+.success-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.8rem;text-transform:uppercase;color:var(--Y);margin-bottom:.5rem}
+.success-sub{font-size:.9rem;color:var(--T);line-height:1.6;margin-bottom:1.5rem}
+
+/* COUNTER */
+.counter{background:var(--BM);border-radius:10px;padding:1rem;text-align:center;margin:.75rem 0;border:1px solid var(--T3)}
+.counter-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.5rem;color:var(--Y);line-height:1}
+.counter-label{font-size:.72rem;color:var(--T2);text-transform:uppercase;letter-spacing:.06em;margin-top:.2rem}
+
+/* CONTACTS LIST */
+.contacts-list{margin:1rem 0}
+.contact-item{background:var(--BM);border-radius:8px;padding:.85rem 1rem;margin-bottom:.5rem;border-left:3px solid var(--T3)}
+.contact-item.caliente{border-left-color:var(--Y)}
+.contact-item.tibio{border-left-color:#E87C75}
+.contact-name{font-weight:600;font-size:.9rem;color:var(--W)}
+.contact-meta{font-size:.72rem;color:var(--T2);margin-top:.15rem}
+.contact-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.4rem}
+.ctag{font-size:.62rem;font-weight:700;padding:.12rem .4rem;border-radius:2px;text-transform:uppercase}
+.ctag.y{background:rgba(245,197,24,.2);color:var(--Y)}
+.ctag.r{background:rgba(192,57,43,.2);color:#E87C75}
+.ctag.g{background:rgba(26,122,74,.2);color:#5EC48A}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--BM);border-top:1px solid var(--T3);display:flex;gap:.5rem;padding:.75rem 1rem;max-width:480px;margin:0 auto}
+.bnav-btn{flex:1;padding:.6rem;border-radius:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;border:none;transition:all .15s;text-align:center}
+.bnav-btn.active{background:var(--Y);color:var(--B)}
+.bnav-btn.inactive{background:transparent;color:var(--T2);border:1px solid var(--T3)}
+.bnav-btn.inactive:hover{color:var(--W)}
+
+/* DIVIDER */
+.div{border:none;border-top:1px solid var(--T3);margin:1rem 0}
+.btn:active,.cluster-btn:active,.perfil-btn:active,.termo-opt:active,.bnav-btn:active{opacity:.75;transform:scale(.98)}
+.nav,.main{-webkit-overflow-scrolling:touch}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">Guía de Conversación</div>
+    <div class="hdr-sub">Fajardo 2026 · Eje Cafetero</div>
+  </div>
+  <button class="hdr-btn" onclick="showView('contacts')">📋 Mis contactos</button>
+</div>
+
+<div class="main" id="main-content">
+
+<!-- ══════════════════════════════════
+     VIEW: INICIO
+══════════════════════════════════ -->
+<div id="view-inicio" class="step on">
+  <div class="counter">
+    <div class="counter-num" id="total-counter">0</div>
+    <div class="counter-label">Conversaciones registradas hoy</div>
+  </div>
+
+  <div class="card" style="background:rgba(245,197,24,.08);border-color:var(--Y)">
+    <div class="card-title">Mensaje de la semana</div>
+    <p style="font-style:italic;font-size:.9rem;color:var(--W)">"Si todos votan por el que creen mejor, gana el mejor. Si todos votan por miedo, ganan los mismos."</p>
+    <p style="font-size:.72rem;color:var(--T2);margin-top:.4rem">#FajardoEnPrimera · #HayTiempo · #HayAlternativa</p>
+  </div>
+
+  <div class="card highlight">
+    <span class="card-ico">💬</span>
+    <div class="card-title">Nueva conversación</div>
+    <p>Guía paso a paso para convertir un indeciso. Sigue el flujo — te dice exactamente qué decir.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn" onclick="startConversacion()" ontouchend="this.click()">
+      <span>▶ Iniciar conversación</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn secondary" onclick="showView('contacts')">
+      <span>📋 Ver contactos registrados</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Eventos clave de la semana</div>
+    <p style="font-size:.8rem;line-height:1.8;color:var(--T)">
+      <strong style="color:var(--Y)">Mar 26 7pm</strong> · TikTok Live Maratón Digital<br>
+      <strong style="color:var(--Y)">Mié 27 12:15pm</strong> · Entrevista Consejo Competitividad<br>
+      <strong style="color:var(--Y)">Jue 28 7:30pm</strong> · 👩 Zoom Mujeres con Edna — <em>invita tus contactas</em><br>
+      <strong style="color:var(--Y)">Vie 29 6:30pm</strong> · 🔴 Gran Debate Caracol — <em>avisa a todos</em><br>
+      <strong style="color:var(--Y)">Sáb 30 7pm</strong> · Encuentro Virtual Voluntarios con Fajardo
+    </p>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="card">
+    <div class="card-title">Recuerda siempre</div>
+    <p>Escuchas el <strong>70%</strong>. Hablas el <strong>30%</strong>.<br>
+    Una conversación de <strong>+2 minutos</strong> vale más que 100 volantes.<br>
+    Si duró más de <strong>60 segundos</strong> → deja la tarjeta.<br>
+    Meta: cada uno convence a <strong>3 personas</strong> (1x3).</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     VIEW: FLUJO - PASO 1 APERTURA
+══════════════════════════════════ -->
+<div id="view-s1" class="step">
+  <button class="back-btn" onclick="showView('inicio')">← Volver al inicio</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:14%"></div></div><span class="prog-label">Paso 1 de 7</span></div>
+  <div class="phase apertura">🎙️ Apertura</div>
+
+  <div class="card highlight">
+    <div class="card-title">El termómetro de decisión</div>
+    <p>Abre con esto. No menciones a Fajardo todavía.</p>
+    <div class="script">"En una escala del 1 al 10, ¿qué tan decidido está su voto para el domingo?"</div>
+    <p style="font-size:.8rem;color:var(--T2);margin-top:.5rem">Espera la respuesta. Escucha sin interrumpir.</p>
+  </div>
+
+  <p style="font-size:.8rem;color:var(--T2);margin-bottom:.5rem;text-align:center;font-weight:600;text-transform:uppercase;letter-spacing:.06em">¿Qué responde?</p>
+
+  <div class="termo">
+    <div class="termo-opt alto" onclick="goto('s2-alto')">
+      <div class="termo-num">8–10</div>
+      <div class="termo-label">Ya decidió</div>
+    </div>
+    <div class="termo-opt mid" onclick="goto('s2-mid')">
+      <div class="termo-num">5–7</div>
+      <div class="termo-label">Indeciso oculto</div>
+    </div>
+    <div class="termo-opt bajo" onclick="goto('s2-bajo')">
+      <div class="termo-num">1–4</div>
+      <div class="termo-label">Indeciso abierto</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 2A — YA DECIDIÓ (8-10)
+══════════════════════════════════ -->
+<div id="view-s2-alto" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:28%"></div></div><span class="prog-label">Paso 2 de 7</span></div>
+  <div class="phase diagnostico">🔍 Diagnóstico</div>
+
+  <div class="card">
+    <div class="card-title">Ya decidió (8–10)</div>
+    <p>Pregunta rápido: <strong>"¿Por quién, si me permite?"</strong></p>
+  </div>
+
+  <div class="btns">
+    <button class="btn success" onclick="goto('s2-alto-fajardo')">
+      <span><span class="btn-ico">✅</span> Dice: Fajardo</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn secondary" onclick="goto('salida-elegante')">
+      <span><span class="btn-ico">🔴</span> Dice: otro candidato (convencido)</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn danger" onclick="goto('s3-cluster')">
+      <span><span class="btn-ico">🟡</span> Dice: otro pero con duda</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- FAJARDO CONVENCIDO -->
+<div id="view-s2-alto-fajardo" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:42%"></div></div><span class="prog-label">Paso 3 de 7</span></div>
+  <div class="phase cierre">🎯 Cierre</div>
+
+  <div class="card success">
+    <span class="card-ico">🤝</span>
+    <div class="card-title">Ya es de nosotros</div>
+    <p>No pierdas tiempo. Actívalo como multiplicador.</p>
+    <div class="script g">"¡Qué bueno! Entonces le pido un favor: ¿hay alguien en su familia o trabajo que todavía esté dudando? Porque un voto trae otro. ¿Le puedo dar la tarjeta para que se la pase?"</div>
+  </div>
+
+  <div class="btns">
+    <button class="btn full" onclick="goto('captura')">
+      <span>📝 Registrar contacto y cerrar</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 2B — INDECISO OCULTO (5-7)
+══════════════════════════════════ -->
+<div id="view-s2-mid" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:28%"></div></div><span class="prog-label">Paso 2 de 7</span></div>
+  <div class="phase diagnostico">🔍 Diagnóstico rápido</div>
+
+  <div class="card highlight">
+    <span class="card-ico">⭐</span>
+    <div class="card-title">Indeciso oculto — aquí está el oro</div>
+    <p>Tiene candidato pero no está convencido. Pregunta suavemente:</p>
+    <div class="script">"¿Y qué lo tiene dudando todavía?"</div>
+    <p style="font-size:.8rem;color:var(--T2);margin-top:.5rem">Escucha. Deja que hable. Luego identifica su cluster.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn" onclick="goto('s3-cluster')">
+      <span>🎯 Identificar su perfil</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 2C — INDECISO ABIERTO (1-4)
+══════════════════════════════════ -->
+<div id="view-s2-bajo" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:28%"></div></div><span class="prog-label">Paso 2 de 7</span></div>
+  <div class="phase diagnostico">🔍 Apertura por dolor</div>
+
+  <div class="card">
+    <span class="card-ico">🚪</span>
+    <div class="card-title">Indeciso abierto — máxima oportunidad</div>
+    <p>No vayas a candidatos todavía. Ve a su vida cotidiana:</p>
+    <div class="script">"¿Qué le preocupa más del país ahora mismo — la seguridad en su barrio, la salud, o que las cosas sigan igual?"</div>
+    <p style="font-size:.8rem;color:var(--T2);margin-top:.5rem">Con lo que responda, identificas el cluster.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn" onclick="goto('s3-cluster')">
+      <span>🎯 Identificar su perfil</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 3 — IDENTIFICAR CLUSTER
+══════════════════════════════════ -->
+<div id="view-s3-cluster" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:42%"></div></div><span class="prog-label">Paso 3 de 7</span></div>
+  <div class="phase diagnostico">🔍 Identifica el cluster</div>
+
+  <div class="card">
+    <div class="card-title">¿Cuál es su emoción dominante?</div>
+    <p>Elige la que mejor describe lo que escuchaste:</p>
+  </div>
+
+  <div class="clusters">
+    <button class="cluster-btn" onclick="goto('s4-miedo');setCluster('miedo')">
+      <div class="ico">😨</div>
+      <div class="info">
+        <div class="nombre">Tiene miedo</div>
+        <div class="desc">Vota para evitar algo. Le preocupa Cepeda, la inseguridad, o desperdiciar el voto.</div>
+      </div>
+    </button>
+    <button class="cluster-btn" onclick="goto('s4-decep');setCluster('decepcionado')">
+      <div class="ico">💔</div>
+      <div class="info">
+        <div class="nombre">Está decepcionado</div>
+        <div class="desc">Creyó en algo y falló. No confía. Tiene herida emocional, no argumento racional.</div>
+      </div>
+    </button>
+    <button class="cluster-btn" onclick="goto('s4-desc');setCluster('desconectado')">
+      <div class="ico">😶</div>
+      <div class="info">
+        <div class="nombre">Está desconectado</div>
+        <div class="desc">La política no le importa. Fatiga o primera vez. No tiene referente claro.</div>
+      </div>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 4A — CLUSTER MIEDO
+══════════════════════════════════ -->
+<div id="view-s4-miedo" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:56%"></div></div><span class="prog-label">Paso 4 de 7</span></div>
+  <div class="phase argumento">😨 Cluster Miedo</div>
+
+  <div class="clave">💡 Argumento que funciona: resultados comprobados vs. promesas sin historial</div>
+
+  <p style="font-size:.8rem;color:var(--T2);margin-bottom:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em">¿Cuál se parece más?</p>
+
+  <div class="perfiles">
+    <button class="perfil-btn" onclick="goto('s5-refugiado');setPerfil('El Refugiado')">
+      <div class="pico">🛡️</div>
+      <div class="pinfo"><div class="pname">El Refugiado</div><div class="pmeta">"Voto Paloma para frenar a Cepeda"</div></div>
+    </button>
+    <button class="perfil-btn" onclick="goto('s5-gestor');setPerfil('El Gestor')">
+      <div class="pico">💼</div>
+      <div class="pinfo"><div class="pname">El Gestor</div><div class="pmeta">"Entre Abelardo y Fajardo — quiere resultados"</div></div>
+    </button>
+    <button class="perfil-btn" onclick="goto('s5-dudoso');setPerfil('El Dudoso')">
+      <div class="pico">🤔</div>
+      <div class="pinfo"><div class="pname">El Dudoso</div><div class="pmeta">"Me gusta Fajardo pero siento que desperdiciaría el voto"</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 4B — CLUSTER DECEPCIONADOS
+══════════════════════════════════ -->
+<div id="view-s4-decep" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:56%"></div></div><span class="prog-label">Paso 4 de 7</span></div>
+  <div class="phase argumento">💔 Cluster Decepcionados</div>
+
+  <div class="clave">💡 Argumento que funciona: empatía primero — valida el dolor antes de argumentar</div>
+
+  <p style="font-size:.8rem;color:var(--T2);margin-bottom:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em">¿Cuál se parece más?</p>
+
+  <div class="perfiles">
+    <button class="perfil-btn" onclick="goto('s5-desencantado');setPerfil('El Desencantado')">
+      <div class="pico">😔</div>
+      <div class="pinfo"><div class="pname">El Desencantado</div><div class="pmeta">"Voté Petro y me fue mal. Ya no confío en nadie"</div></div>
+    </button>
+    <button class="perfil-btn" onclick="goto('s5-progresista');setPerfil('El Progresista')">
+      <div class="pico">✊</div>
+      <div class="pinfo"><div class="pname">El Progresista</div><div class="pmeta">"Fajardo es muy tibio, necesitamos más cambio"</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 4C — CLUSTER DESCONECTADOS
+══════════════════════════════════ -->
+<div id="view-s4-desc" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:56%"></div></div><span class="prog-label">Paso 4 de 7</span></div>
+  <div class="phase argumento">😶 Cluster Desconectados</div>
+
+  <div class="clave">💡 Argumento que funciona: su problema cotidiano concreto — nunca política</div>
+
+  <p style="font-size:.8rem;color:var(--T2);margin-bottom:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em">¿Cuál se parece más?</p>
+
+  <div class="perfiles">
+    <button class="perfil-btn" onclick="goto('s5-apatico');setPerfil('El Apático')">
+      <div class="pico">😶</div>
+      <div class="pinfo"><div class="pname">El Apático</div><div class="pmeta">"Todos son iguales, eso no cambia nada"</div></div>
+    </button>
+    <button class="perfil-btn" onclick="goto('s5-estreno');setPerfil('El Estreno')">
+      <div class="pico">🎓</div>
+      <div class="pinfo"><div class="pname">El Estreno</div><div class="pmeta">"Es mi primera vez, no sé a quién votar"</div></div>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 5 — SCRIPTS POR PERFIL
+══════════════════════════════════ -->
+
+<!-- REFUGIADO -->
+<div id="view-s5-refugiado" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">🛡️ El Refugiado</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Atacar a Paloma directamente. Ataca el razonamiento "mal menor", no a ella.</div>
+  <div class="card"><div class="card-title">Di exactamente esto</div>
+    <div class="script">"Entiendo perfectamente — el objetivo es que Cepeda no gane. La pregunta es: ¿quién le gana a Cepeda en segunda vuelta? Fajardo tiene el rechazo más bajo de todos. Puede atraer votos del centro que Paloma y Abelardo no pueden. Es matemática electoral, no ideología."</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- GESTOR -->
+<div id="view-s5-gestor" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">💼 El Gestor</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Hablar de valores o decencia. Solo gestión y resultados concretos.</div>
+  <div class="card"><div class="card-title">Di exactamente esto</div>
+    <div class="script">"Abelardo promete recuperar el territorio en 90 días y 7 megacárceles. Fajardo ya redujo el homicidio a la mitad en Medellín — con datos verificables. ¿Usted en los negocios le daría la empresa a alguien que nunca ha gestionado nada, o a alguien con resultados comprobados?"</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- DUDOSO -->
+<div id="view-s5-dudoso" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">🤔 El Dudoso</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Presionarla. Su duda ya existe — solo dale permiso para actuar sobre ella.</div>
+  <div class="card"><div class="card-title">Di exactamente esto</div>
+    <div class="script">"Ese instinto que siente — escúchelo. ¿Sabe cuánta gente está exactamente en la misma duda que usted? Millones. Todos esperando que alguien más se mueva primero. Votar por quien usted realmente cree no es desperdiciar el voto — es el único voto que no se desperdicia."</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- DESENCANTADO -->
+<div id="view-s5-desencantado" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">😔 El Desencantado</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Mencionar a Petro. Hacerla sentir ingenua. Cierra la conversación al instante.</div>
+  <div class="card"><div class="card-title">Primero empatía, luego argumento</div>
+    <div class="script">"Tiene toda la razón en desconfiar. Sería raro que no lo hiciera. Pero hay una diferencia enorme entre alguien que prometió sin haber ejecutado nunca, y alguien que ya lo hizo. Medellín existe. Los datos existen. Eso no es promesa — es historial comprobable."</div>
+    <div class="script">"Si usted se queda en casa el domingo, quien decide por usted es alguien que nunca ha dudado. ¿Eso es lo que quiere?"</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- PROGRESISTA -->
+<div id="view-s5-progresista" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">✊ El Progresista</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Atacar a Cepeda directamente. Hablar de libre mercado. Solo resultados sociales.</div>
+  <div class="card"><div class="card-title">Di exactamente esto</div>
+    <div class="script">"¿Tibio el que cerró la brecha educativa en Medellín y construyó colegios en los barrios más violentos? ¿Tibio el que mejoró el acceso a salud pública cuando nadie creía que era posible? Fajardo no grita transformación — la ejecuta."</div>
+    <div class="script">"Cepeda tiene el discurso. Fajardo tiene los resultados. ¿Cuál de los dos tiene el historial para hacerlo de verdad?"</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- APÁTICO -->
+<div id="view-s5-apatico" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">😶 El Apático</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Empezar con política o candidatos. Lo pierdes en 10 segundos.</div>
+  <div class="card"><div class="card-title">Empieza por su vida, no por política</div>
+    <div class="script">"¿Y cómo está la seguridad por su negocio? ¿La EPS le responde cuando la necesita? Eso no cambia solo — alguien tiene que saber administrar. Hay uno que ya lo demostró en Medellín. Con datos que usted puede googlear."</div>
+    <div class="script">"No le pido que se emocione con la política. Solo 3 minutos el domingo para marcar su voto."</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- ESTRENO -->
+<div id="view-s5-estreno" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:70%"></div></div><span class="prog-label">Paso 5 de 7</span></div>
+  <div class="phase argumento">🎓 El Estreno</div>
+  <div class="warn"><strong>❌ Nunca:</strong> Decir "institucionalidad" o "gestión pública". Habla su idioma.</div>
+  <div class="card"><div class="card-title">Simple, directo, de identidad</div>
+    <div class="script">"¿Prefieres votar por alguien con millones de seguidores en TikTok o por alguien que ya demostró que sabe hacer las cosas? Fajardo transformó Medellín — la ciudad más violenta del mundo se volvió referente mundial. Eso lo puedes googlear ahora mismo."</div>
+    <div class="script">"¿Quieres ser parte del circo o del cambio real?"</div>
+  </div>
+  <div class="btns"><button class="btn" onclick="goto('s6-objecion')"><span>¿Cómo responde?</span><span class="btn-arrow">→</span></button></div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 6 — MANEJO DE OBJECIÓN
+══════════════════════════════════ -->
+<div id="view-s6-objecion" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:84%"></div></div><span class="prog-label">Paso 6 de 7</span></div>
+  <div class="phase argumento">⚡ Objeción</div>
+
+  <div class="card"><div class="card-title">¿Qué dice?</div></div>
+
+  <div class="btns">
+    <button class="btn success" onclick="goto('s7-cierre1')">
+      <span><span class="btn-ico">✅</span> Se abre — hay simpatía</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn danger" onclick="goto('s7-cierre2')">
+      <span><span class="btn-ico">⚡</span> "No va a ganar de todas formas"</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn secondary" onclick="goto('salida-elegante')">
+      <span><span class="btn-ico">🚪</span> Se cierra — no hay apertura</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PASO 7 — CIERRES
+══════════════════════════════════ -->
+
+<!-- CIERRE 1 — SIMPATÍA -->
+<div id="view-s7-cierre1" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div><span class="prog-label">Paso 7 de 7</span></div>
+  <div class="phase cierre">🤝 Cierre 1 — Simpatía</div>
+
+  <div class="card success">
+    <div class="card-title">Di exactamente esto</div>
+    <div class="script g">"Hay 7 millones de colombianos exactamente donde está usted hoy. La diferencia entre los que cambian algo y los que no es una sola decisión. ¿Me da su número para recordarle el domingo a qué hora sale?"</div>
+  </div>
+
+  <div class="card highlight">
+    <div class="card-title">🗺️ Siempre al final</div>
+    <div class="script">"¿Sabe en qué puesto le toca votar? Le busco ahora mismo — ¿se lo mando por WhatsApp o le dejo la tarjeta?"</div>
+  </div>
+
+  <div class="btns">
+    <button class="btn full" onclick="goto('captura')">
+      <span>📝 Registrar contacto</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- CIERRE 2 — VIABILIDAD -->
+<div id="view-s7-cierre2" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="progress"><div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div><span class="prog-label">Paso 7 de 7</span></div>
+  <div class="phase cierre">⚡ Cierre 2 — Viabilidad</div>
+
+  <div class="card">
+    <div class="card-title">Di exactamente esto</div>
+    <div class="script">"Si todos votan por el que creen mejor, gana el mejor. Si todos votan por miedo, ganan los mismos de siempre. ¿Prefiere quedarse en casa y saber con certeza quién ganó, o ir a votar y ser parte de la sorpresa?"</div>
+    <p style="font-size:.8rem;color:var(--T2);margin-top:.5rem">Deja el silencio. No llenes el espacio. Espera.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn success" onclick="goto('captura')">
+      <span><span class="btn-ico">✅</span> Se abre → Registrar</span>
+      <span class="btn-arrow">→</span>
+    </button>
+    <button class="btn secondary" onclick="goto('salida-elegante')">
+      <span><span class="btn-ico">🚪</span> Sigue cerrado → Salida elegante</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SALIDA ELEGANTE
+══════════════════════════════════ -->
+<div id="view-salida-elegante" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="phase danger" style="display:inline-flex;margin-bottom:.75rem">🚪 Salida elegante</div>
+
+  <div class="card danger">
+    <div class="card-title">No hay apertura — sal con dignidad</div>
+    <div class="script r">"Lo entiendo perfectamente. Si en algún momento quiere más información antes del domingo, aquí tiene el contacto."</div>
+    <p style="font-size:.8rem;color:var(--T2);margin-top:.5rem">Si la conversación duró menos de 60 segundos → no dejes tarjeta. Si duró más → déjala.</p>
+  </div>
+
+  <div class="btns">
+    <button class="btn secondary" onclick="goto('inicio')">
+      <span>↩ Volver al inicio</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CAPTURA DE CONTACTO
+══════════════════════════════════ -->
+<div id="view-captura" class="step">
+  <button class="back-btn" onclick="goBack()">← Atrás</button>
+  <div class="phase captura">📝 Registrar contacto</div>
+
+  <div class="card highlight">
+    <div class="card-title">Datos del contacto</div>
+
+    <div class="form-group">
+      <label class="form-label">Nombre</label>
+      <input class="form-input" id="cap-nombre" type="text" placeholder="Nombre de la persona">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">WhatsApp (opcional)</label>
+      <input class="form-input" id="cap-tel" type="tel" placeholder="+57 300 000 0000">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Municipio</label>
+      <select class="form-input" id="cap-muni">
+        <option value="">Selecciona...</option>
+        <option>Pereira</option>
+        <option>Armenia</option>
+        <option>Manizales</option>
+        <option>Bogotá</option>
+        <option>Dosquebradas</option>
+        <option>Santa Rosa de Cabal</option>
+        <option>Otro Eje Cafetero</option>
+        <option>Otra ciudad</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Temperatura de decisión (1–10)</label>
+      <div class="stars" id="stars-container">
+        <span class="star" onclick="setStar(2)">●</span>
+        <span class="star" onclick="setStar(4)">●</span>
+        <span class="star" onclick="setStar(5)">●</span>
+        <span class="star" onclick="setStar(7)">●</span>
+        <span class="star" onclick="setStar(9)">●</span>
+      </div>
+      <p style="font-size:.7rem;color:var(--T2);margin-top:.25rem" id="star-label">Toca para registrar</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Perfil identificado</label>
+      <select class="form-input" id="cap-perfil">
+        <option value="">Selecciona...</option>
+        <option>😨 El Refugiado</option>
+        <option>💼 El Gestor</option>
+        <option>🤔 El Dudoso</option>
+        <option>😔 El Desencantado</option>
+        <option>✊ El Progresista</option>
+        <option>😶 El Apático</option>
+        <option>🎓 El Estreno</option>
+        <option>Ya era de Fajardo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Cierre usado</label>
+      <select class="form-input" id="cap-cierre">
+        <option value="">Selecciona...</option>
+        <option>Cierre 1 — Simpatía con indecisión</option>
+        <option>Cierre 2 — Resistencia por viabilidad</option>
+        <option>Cierre 3 — Apertura total</option>
+        <option>Salida elegante — sin apertura</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">¿Dejaste la tarjeta?</label>
+      <select class="form-input" id="cap-tarjeta">
+        <option value="">Selecciona...</option>
+        <option>Sí — dejé la tarjeta</option>
+        <option>No — conversación muy corta</option>
+        <option>Le mandé el puesto por WhatsApp</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Acciones adicionales</label>
+      <select class="form-input" id="cap-acciones">
+        <option value="">Selecciona si aplica...</option>
+        <option>Invitada al Zoom Mujeres Jue 28 7:30pm</option>
+        <option>Le envié video de voluntaria</option>
+        <option>Le avisé del Debate Caracol Vie 29 6:30pm</option>
+        <option>Le avisé del Encuentro Voluntarios Sáb 30 7pm</option>
+        <option>Confirmó que va a votar el domingo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Notas (opcional)</label>
+      <textarea class="form-input" id="cap-notas" placeholder="Algo importante que quieras recordar..."></textarea>
+    </div>
+  </div>
+
+  <div class="btns">
+    <button class="btn full" onclick="guardarContacto()">
+      <span>✅ Guardar contacto</span>
+      <span class="btn-arrow">→</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ÉXITO
+══════════════════════════════════ -->
+<div id="view-exito" class="step">
+  <div class="success-screen">
+    <span class="success-ico">🎯</span>
+    <div class="success-title">¡Contacto registrado!</div>
+    <div class="success-sub" id="exito-msg">Guardado correctamente.</div>
+
+    <div class="counter">
+      <div class="counter-num" id="exito-counter">0</div>
+      <div class="counter-label">Conversaciones registradas hoy</div>
+    </div>
+
+    <div class="btns">
+      <button class="btn" onclick="startConversacion()" ontouchend="this.click()">
+        <span>▶ Nueva conversación</span>
+        <span class="btn-arrow">→</span>
+      </button>
+      <button class="btn secondary" onclick="showView('contacts')">
+        <span>📋 Ver todos mis contactos</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CONTACTS VIEW
+══════════════════════════════════ -->
+<div id="view-contacts" class="step">
+  <button class="back-btn" onclick="showView('inicio')">← Volver al inicio</button>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+    <div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;color:var(--Y)">Mis contactos</div>
+      <div style="font-size:.72rem;color:var(--T2)" id="contacts-count">Cargando...</div>
+    </div>
+    <button class="hdr-btn" onclick="exportarWhatsApp()" style="font-size:.68rem">📤 Exportar</button>
+  </div>
+
+  <div id="contacts-list" class="contacts-list">
+    <div style="text-align:center;padding:2rem;color:var(--T2);font-size:.85rem">No hay contactos registrados aún.</div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let currentView = 'inicio';
+let currentCluster = '';
+let currentPerfil = '';
+let starValue = 0;
+let contacts = [];
+let navStack = [];
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function goto(id) {
+  navStack.push(currentView);
+  if(navStack.length > 20) navStack.shift();
+  showStep('view-' + id);
+  currentView = id;
+}
+
+function goBack() {
+  if(navStack.length > 0) {
+    const prev = navStack.pop();
+    showStep('view-' + prev);
+    currentView = prev;
+  } else {
+    showView('inicio');
+  }
+}
+
+function showStep(id) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('on'));
+  const el = document.getElementById(id);
+  if (el) { el.classList.add('on'); window.scrollTo(0,0); }
+}
+
+function showView(v) {
+  navStack = [];
+  if (v === 'contacts') { renderContacts(); }
+  if (v === 'inicio') { updateCounter(); }
+  showStep('view-' + v);
+  currentView = v;
+}
+
+function startConversacion() {
+  currentCluster = '';
+  currentPerfil = '';
+  starValue = 0;
+  resetForm();
+  goto('s1');
+}
+
+function setCluster(c) { currentCluster = c; }
+function setPerfil(p) {
+  currentPerfil = p;
+  document.getElementById('cap-perfil').value = '';
+  // Pre-select in form
+  const sel = document.getElementById('cap-perfil');
+  for (let o of sel.options) {
+    if (o.text.includes(p.replace('El ',''))) { sel.value = o.value; break; }
+  }
+}
+
+// ═══════════════════════════════════════
+// STARS
+// ═══════════════════════════════════════
+const starMap = [2, 4, 5, 7, 9];
+function setStar(val) {
+  starValue = val;
+  const stars = document.querySelectorAll('.star');
+  const idx = starMap.indexOf(val);
+  stars.forEach((s, i) => s.classList.toggle('on', i <= idx));
+  const labels = ['', 'Muy frío (1-2)', 'Frío (3-4)', 'Tibio (5)', 'Caliente (6-7)', 'Decidido (8-9+)'];
+  document.getElementById('star-label').textContent = labels[idx+1] || 'Registrado: ' + val;
+}
+
+// ═══════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════
+async function loadContacts() {
+  try {
+    const r = await window.storage.get('fajardo_contacts');
+    if (r && r.value) contacts = JSON.parse(r.value);
+  } catch(e) { contacts = []; }
+}
+
+async function saveContacts() {
+  try {
+    await window.storage.set('fajardo_contacts', JSON.stringify(contacts));
+  } catch(e) { console.error('Storage error:', e); }
+}
+
+// ═══════════════════════════════════════
+// GUARDAR CONTACTO
+// ═══════════════════════════════════════
+async function guardarContacto() {
+  const nombre = document.getElementById('cap-nombre').value.trim();
+  if (!nombre) { alert('Por favor ingresa el nombre de la persona.'); return; }
+
+  const contacto = {
+    id: Date.now(),
+    fecha: new Date().toLocaleDateString('es-CO'),
+    hora: new Date().toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit'}),
+    nombre,
+    tel: document.getElementById('cap-tel').value.trim(),
+    municipio: document.getElementById('cap-muni').value,
+    temperatura: starValue,
+    cluster: currentCluster,
+    perfil: document.getElementById('cap-perfil').value || currentPerfil,
+    cierre: document.getElementById('cap-cierre').value,
+    tarjeta: document.getElementById('cap-tarjeta').value,
+    notas: document.getElementById('cap-notas').value.trim(),
+    caliente: starValue >= 6
+  };
+
+  contacts.unshift(contacto);
+  await saveContacts();
+
+  document.getElementById('exito-msg').textContent =
+    contacto.caliente
+      ? `✅ ${nombre} guardado como contacto CALIENTE para el sábado.`
+      : `✅ ${nombre} guardado correctamente.`;
+
+  updateCounter();
+  document.getElementById('exito-counter').textContent = contacts.length;
+  goto('exito');
+}
+
+// ═══════════════════════════════════════
+// RENDER CONTACTS
+// ═══════════════════════════════════════
+function renderContacts() {
+  const list = document.getElementById('contacts-list');
+  const count = document.getElementById('contacts-count');
+
+  if (!contacts.length) {
+    list.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(255,255,255,.4);font-size:.85rem">No hay contactos registrados aún.<br>Inicia tu primera conversación.</div>';
+    count.textContent = '0 contactos registrados';
+    return;
+  }
+
+  const calientes = contacts.filter(c => c.caliente).length;
+  count.textContent = `${contacts.length} contactos · ${calientes} calientes para el sábado`;
+
+  list.innerHTML = contacts.map(c => `
+    <div class="contact-item ${c.caliente ? 'caliente' : 'tibio'}">
+      <div class="contact-name">${c.nombre} ${c.caliente ? '🔥' : ''}</div>
+      <div class="contact-meta">${c.municipio || 'Sin municipio'} · ${c.hora} ${c.fecha}${c.tel ? ' · ' + c.tel : ''}</div>
+      <div class="contact-tags">
+        ${c.perfil ? `<span class="ctag y">${c.perfil}</span>` : ''}
+        ${c.caliente ? `<span class="ctag g">Caliente</span>` : `<span class="ctag r">Tibio</span>`}
+        ${c.tarjeta && c.tarjeta.includes('Sí') ? `<span class="ctag y">Tarjeta ✓</span>` : ''}
+      </div>
+      ${c.notas ? `<div style="font-size:.75rem;color:rgba(255,255,255,.5);margin-top:.35rem;font-style:italic">${c.notas}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════
+// EXPORTAR WHATSAPP
+// ═══════════════════════════════════════
+function exportarWhatsApp() {
+  const calientes = contacts.filter(c => c.caliente && c.tel);
+  if (!calientes.length) {
+    alert('No hay contactos calientes con número de WhatsApp registrado todavía.');
+    return;
+  }
+  const texto = calientes.map(c =>
+    `${c.nombre} (${c.municipio || ''}): ${c.tel}`
+  ).join('\n');
+
+  const blob = new Blob([
+    `CONTACTOS CALIENTES — SÁBADO 30 MAYO\nFajardo 2026 · Eje Cafetero\n\n${texto}\n\nTotal: ${calientes.length} contactos`
+  ], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'contactos_calientes_fajardo.txt';
+  a.click();
+}
+
+// ═══════════════════════════════════════
+// COUNTER & RESET
+// ═══════════════════════════════════════
+function updateCounter() {
+  document.getElementById('total-counter').textContent = contacts.length;
+}
+
+function resetForm() {
+  ['cap-nombre','cap-tel','cap-notas'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['cap-muni','cap-perfil','cap-cierre','cap-tarjeta'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+  const lbl = document.getElementById('star-label');
+  if (lbl) lbl.textContent = 'Toca para registrar';
+  starValue = 0;
+}
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+window.addEventListener('load', async () => {
+  await loadContacts();
+  updateCounter();
+});
+</script>
+</body>
+</html>
